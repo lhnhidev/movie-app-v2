@@ -1,11 +1,7 @@
+import Header from "./components/Header"
+
 const App = () => {
-  const TestFunction = (): number => {
-    return 100
-  }
-
-  TestFunction()
-
-  return <h1 className="text-3xl font-bold underline">Hello world!</h1>
+  return <Header />
 }
 
 export default App
