@@ -1,14 +1,14 @@
 import { FaPlay } from "react-icons/fa"
 import { MdInfoOutline } from "react-icons/md"
 
-const FeaturesMovie = () => {
+const Movie = () => {
   return (
-    <div className="relative">
+    <div>
       <div>
         <img
           src="https://occ-0-325-395.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABW4vW4VPWVuYJ1YiojN-45O5Wt336hrKUzY5BHEMTBEo1bodXcMV4XqLijP1of104bMF0xKQJ6Sef5XVWqHZD39PGYsVb6coNNs1.webp?r=f33"
           alt="thumbnail-movie"
-          className="aspect-video w-full"
+          className="aspect-video w-full brightness-75"
         />
       </div>
 
@@ -39,18 +39,9 @@ const FeaturesMovie = () => {
             Information
           </button>
         </div>
-
-        <div className="absolute right-6">
-          <ul className="flex gap-1">
-            <li className="h-1 w-8 bg-slate-500"></li>
-            <li className="h-1 w-8 bg-slate-500"></li>
-            <li className="h-1 w-8 bg-slate-500"></li>
-            <li className="h-1 w-8 bg-slate-500"></li>
-          </ul>
-        </div>
       </div>
     </div>
   )
 }
 
-export default FeaturesMovie
+export default Movie

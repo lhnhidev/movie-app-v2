@@ -1,4 +1,4 @@
-import FeaturesMovie from "./components/FeaturesMovie"
+import FeaturesMovie from "./components/FeatureMovies"
 import Header from "./components/Header"
 
 const App = () => {
