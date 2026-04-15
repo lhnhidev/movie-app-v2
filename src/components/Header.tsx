@@ -14,7 +14,7 @@ const Header = () => {
         <div>Phim</div>
         <div>Truyền hình</div>
       </div>
-      <div className="text-2xl">
+      <div className="cursor-pointer text-2xl transition-all hover:text-gray-300">
         <IoSearch />
       </div>
     </div>
