@@ -1,12 +1,18 @@
 import { FaPlay } from "react-icons/fa"
 import { MdInfoOutline } from "react-icons/md"
 
-const Movie = () => {
+type MovieType = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  movies: Array<Record<string, any>>
+  movieIdActive: number
+}
+
+const Movie = ({ movies, movieIdActive }: MovieType) => {
   return (
     <div>
       <div>
         <img
-          src="https://occ-0-325-395.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABW4vW4VPWVuYJ1YiojN-45O5Wt336hrKUzY5BHEMTBEo1bodXcMV4XqLijP1of104bMF0xKQJ6Sef5XVWqHZD39PGYsVb6coNNs1.webp?r=f33"
+          src={`https://image.tmdb.org/t/p/original/${movies[movieIdActive - 1]?.backdrop_path}`}
           alt="thumbnail-movie"
           className="aspect-video w-full brightness-75"
         />
@@ -14,18 +20,17 @@ const Movie = () => {
 
       <div className="absolute bottom-[10%] left-6 space-y-4 text-white">
         <div className="space-y-2">
-          <p className="text-xl font-bold sm:text-2xl">Tiêu đề bộ phim</p>
+          <p className="text-xl font-bold sm:text-2xl">
+            {movies[movieIdActive - 1]?.title}
+          </p>
           <div className="inline-flex border border-gray-200 p-1">PG 13</div>
-          <p>2026-04-15</p>
+          <p>{movies[movieIdActive - 1]?.release_date}</p>
         </div>
 
         <div className="hidden w-1/2 sm:block">
           <h3 className="text-2xl font-bold">Overview</h3>
           <p className="line-clamp-3 min-[800px]:line-clamp-none">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium
-            eos deserunt, dolore corporis cumque laudantium? Inventore quo
-            reprehenderit, laudantium eius rem dolore nemo modi voluptate
-            aliquid fugit dolorum id praesentium.
+            {movies[movieIdActive - 1]?.overview}
           </p>
         </div>
 
