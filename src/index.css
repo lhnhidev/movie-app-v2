@@ -1,1 +1,38 @@
 @import "tailwindcss";
+
+@font-face {
+  font-family: "Netflix Sans";
+  font-weight: 400;
+  src:
+    local("NetflixSans-Regular"),
+    url("./fonts/NetflixSans-Regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Netflix Sans";
+  font-weight: 700;
+  src:
+    local("NetflixSans-Bold"),
+    url("./fonts/NetflixSans-Bold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Netflix Sans";
+  font-weight: 300;
+  src:
+    local("NetflixSans-Light"),
+    url("./fonts/NetflixSans-Light.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Netflix Sans";
+  font-weight: 600;
+  src:
+    local("NetflixSans-Medium"),
+    url("./fonts/NetflixSans-Medium.woff2") format("woff2");
+}
+
+body {
+  font-family: "Netflix Sans";
+  font-weight: 400;
+}
