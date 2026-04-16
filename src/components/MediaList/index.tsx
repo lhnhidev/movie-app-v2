@@ -1,12 +1,31 @@
 import { useEffect, useState } from "react"
 import MovieCard from "./MovieCard"
+import MediaControler from "./MediaControler"
+import type { TabType } from "../../types"
 
-const MediaList = () => {
+type MediaListType = {
+  title: string
+  type: "trend" | "rate"
+  tabContent: Array<{ id: string; label: string }>
+}
+
+const MediaList = ({ title, tabContent, type }: MediaListType) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [mediaList, setMediaList] = useState<Array<Record<string, any>>>([])
+  const [tabActive, setTabActive] = useState<TabType>(
+    type === "trend" ? "all" : "tv"
+  )
 
   useEffect(() => {
-    fetch("https://api.themoviedb.org/3/trending/all/day?language=en-US", {
+    let api = ""
+
+    if (type === "rate") {
+      api = `https://api.themoviedb.org/3/${tabActive}/top_rated`
+    } else if (type === "trend") {
+      api = `https://api.themoviedb.org/3/trending/${tabActive}/day?language=en-US`
+    }
+
+    fetch(api, {
       method: "GET",
       headers: {
         accept: "application/json",
@@ -16,23 +35,19 @@ const MediaList = () => {
     })
       .then((res) => res.json())
       .then((data) => {
+        console.log(data.results.slice(0, 12))
         setMediaList(data.results.slice(0, 12))
       })
-  }, [])
+  }, [tabActive])
 
   return (
     <div className="bg-slate-950 px-8 py-10 text-white">
-      <div className="pb-10">
-        <div className="flex items-center gap-14">
-          <h3 className="text-2xl font-bold">Trending</h3>
-
-          <ul className="flex rounded-lg border border-gray-100">
-            <li className="rounded-lg bg-white px-4 py-2 text-black">All</li>
-            <li className="rounded-lg px-4 py-2">Movie</li>
-            <li className="rounded-lg px-4 py-2">Tv show</li>
-          </ul>
-        </div>
-      </div>
+      <MediaControler
+        tabActive={tabActive}
+        setTabActive={setTabActive}
+        title={title}
+        tabContent={tabContent}
+      />
 
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 lg:grid-cols-6">
         {mediaList.map((media) => {
@@ -43,7 +58,11 @@ const MediaList = () => {
               posterPath={media?.poster_path}
               point={Math.round((media?.vote_average ?? 0) * 10)}
               releaseDay={media?.release_date || media?.first_air_date}
-              isTvShow={media?.media_type === "tv"}
+              isTvShow={
+                tabActive === "all"
+                  ? media?.media_type === "tv"
+                  : tabActive === "tv"
+              }
             />
           )
         })}
