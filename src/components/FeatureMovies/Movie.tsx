@@ -18,18 +18,20 @@ const Movie = ({ movies, movieIdActive }: MovieType) => {
         />
       </div>
 
-      <div className="absolute bottom-[10%] left-6 space-y-4 text-white">
+      <div className="absolute bottom-[10%] left-6 space-y-2 text-white min-[1000px]:space-y-4">
         <div className="space-y-2">
-          <p className="text-xl font-bold sm:text-2xl">
+          <p className="text-lg font-bold min-[1000px]:text-2xl">
             {movies[movieIdActive - 1]?.title}
           </p>
-          <div className="inline-flex border border-gray-200 p-1">PG 13</div>
+          <div className="inline-flex border border-gray-200 p-1 text-sm min-[1000px]:text-lg">
+            PG 13
+          </div>
           <p>{movies[movieIdActive - 1]?.release_date}</p>
         </div>
 
         <div className="hidden w-1/2 sm:block">
-          <h3 className="text-2xl font-bold">Overview</h3>
-          <p className="line-clamp-3 min-[800px]:line-clamp-none">
+          <h3 className="text-lg font-bold min-[1000px]:text-2xl">Overview</h3>
+          <p className="line-clamp-3 text-sm min-[1000px]:line-clamp-none min-[1000px]:text-lg">
             {movies[movieIdActive - 1]?.overview}
           </p>
         </div>

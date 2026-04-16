@@ -35,9 +35,9 @@ const MediaList = ({ title, tabContent, type }: MediaListType) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.results.slice(0, 12))
         setMediaList(data.results.slice(0, 12))
       })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tabActive])
 
   return (
