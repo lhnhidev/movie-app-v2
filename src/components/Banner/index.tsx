@@ -32,7 +32,6 @@ const Banner = () => {
         })
 
         const data = await result.json()
-        console.log(data)
         setFilm(data)
       } catch (error) {
         throw new Error((error as Error).message)
