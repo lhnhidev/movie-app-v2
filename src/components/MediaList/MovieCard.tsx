@@ -1,4 +1,4 @@
-import CircularProgressBar from "./CircularProgress"
+import CircularProgressBar from "../CircularProgress"
 
 type MovieCard = {
   title: string | undefined

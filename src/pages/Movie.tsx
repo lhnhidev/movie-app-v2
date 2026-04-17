@@ -1,5 +1,7 @@
+import Banner from "../components/Banner"
+
 const Movie = () => {
-  return <div>Movie Page</div>
+  return <Banner />
 }
 
 export default Movie
