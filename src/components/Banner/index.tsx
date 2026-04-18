@@ -12,6 +12,8 @@ type FilmType = {
   poster_path: string
   release_date: string
   genres: Array<{ id: number; name: string }>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  credits: any
 }
 
 const Banner = () => {
@@ -22,14 +24,17 @@ const Banner = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await fetch(`https://api.themoviedb.org/3/movie/${id}`, {
-          method: "GET",
-          headers: {
-            accept: "application/json",
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1MDc2OGExMTZkMTA2ZDgwNWI0NjdiYzVmYTcwN2UwZSIsIm5iZiI6MTc0NTg1NzYzOC41NDMsInN1YiI6IjY4MGZhYzY2YTkwYWNhZjZlZWVhZTBmMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.qfLXEhFU67ZpVdb4mPiYW0PWFZhUopzjGpeGWATHSOI"
+        const result = await fetch(
+          `https://api.themoviedb.org/3/movie/${id}?append_to_response=credits`,
+          {
+            method: "GET",
+            headers: {
+              accept: "application/json",
+              Authorization:
+                "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1MDc2OGExMTZkMTA2ZDgwNWI0NjdiYzVmYTcwN2UwZSIsIm5iZiI6MTc0NTg1NzYzOC41NDMsInN1YiI6IjY4MGZhYzY2YTkwYWNhZjZlZWVhZTBmMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.qfLXEhFU67ZpVdb4mPiYW0PWFZhUopzjGpeGWATHSOI"
+            }
           }
-        })
+        )
 
         const data = await result.json()
         setFilm(data)
@@ -41,18 +46,28 @@ const Banner = () => {
     fetchData()
   }, [id])
 
+  const renderInfo = (info: string) => {
+    return (
+      (film?.credits?.crew || [])
+        ?.filter((member: { job: string }) => member?.job === info)
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        .map((item: { name: any }) => item?.name)
+        .join(", ")
+    )
+  }
+
   return (
     <div className="relative overflow-hidden">
       <img
-        className="absolute inset-0 brightness-[0.2]"
-        src="https://image.tmdb.org/t/p/original/bq28ajZaoMyzEIm6REelqyqtEDZ.jpg"
+        className="absolute inset-0 aspect-video w-full brightness-[0.2]"
+        src={`https://image.tmdb.org/t/p/original/${film?.backdrop_path}`}
         alt="Thumbnail_movie"
       />
 
       <div className="relative z-1 mx-auto flex max-w-7xl gap-10 px-5 py-8 text-white min-[960px]:py-20">
         <div className="flex-1">
           <img
-            src="https://image.tmdb.org/t/p/original/in1R2dDc421JxsoRWaIIAqVI2KE.jpg"
+            src={`https://image.tmdb.org/t/p/original/${film?.poster_path}`}
             alt="Thumbnail_movie"
           />
         </div>
@@ -108,14 +123,16 @@ const Banner = () => {
               <p className="text-md mb-1 font-bold min-[960px]:text-xl">
                 Director
               </p>
-              <p className="min-[960px]:text-md text-sm">Philip Sgriccia</p>
+              <p className="min-[960px]:text-md text-sm">
+                {renderInfo("Director")}
+              </p>
             </div>
             <div>
               <p className="text-md mb-1 font-bold min-[960px]:text-xl">
-                Writter
+                Writer
               </p>
               <p className="min-[960px]:text-md text-sm">
-                Ellie Monahan, Anslem Richardson
+                {renderInfo("Writer")}
               </p>
             </div>
           </div>
