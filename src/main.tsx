@@ -4,15 +4,22 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import Home from "./pages/Home"
 import Movie from "./pages/Movie"
 import "./index.css"
+import RootLayout from "./layouts/RootLayout"
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />
-  },
-  {
-    path: "/movie/:id",
-    element: <Movie />
+    element: <RootLayout />,
+    children: [
+      {
+        path: "/",
+        element: <Home />
+      },
+      {
+        path: "/movie/:id",
+        element: <Movie />
+      }
+    ]
   }
 ])
 
