@@ -1,9 +1,16 @@
+type CircularProgressBarType = {
+  percent?: number
+  size?: number
+  strokeWidth?: number
+  strokeColor?: string
+}
+
 const CircularProgressBar = ({
   percent = 85,
   size = 50,
   strokeWidth = 5,
   strokeColor = "green"
-}) => {
+}: CircularProgressBarType) => {
   const radius = size / 2 - strokeWidth
   const parimeter = 2 * Math.PI * radius
   const mark = parimeter - (percent / 100) * parimeter
