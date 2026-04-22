@@ -53,6 +53,7 @@ const MediaList = ({ title, tabContent, type }: MediaListType) => {
         {mediaList.map((media) => {
           return (
             <MovieCard
+              id={media?.id}
               key={media?.id}
               title={media?.title || media?.name}
               posterPath={media?.poster_path}
